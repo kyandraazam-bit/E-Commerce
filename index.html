@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <link rel="icon" type="png" href="images.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNIQLO ID — Everyday Style, Made Different</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <style>
+        :root { --uniqlo-red: #e60012; --nav-height: 70px; }
+        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #1a1a1a; -webkit-font-smoothing: antialiased; }
+        .btn-danger { background-color: var(--uniqlo-red); border-color: var(--uniqlo-red); }
+        .btn-danger:hover { background-color: #c40010; border-color: #c40010; }
+        .btn-outline-danger { color: var(--uniqlo-red); border-color: var(--uniqlo-red); }
+        .btn-outline-danger:hover { background-color: var(--uniqlo-red); border-color: var(--uniqlo-red); }
+        .text-danger { color: var(--uniqlo-red) !important; }
+        .bg-danger { background-color: var(--uniqlo-red) !important; }
+        .navbar-brand { letter-spacing: 2px; }
+        .nav-link { transition: color .2s; }
+        .nav-link:hover { color: var(--uniqlo-red) !important; }
+        .navbar .form-control:focus { box-shadow: none; background: #fff !important; }
+        .navbar.sticky-top { z-index: 1030; }
+
+        /* ============ CAROUSEL FULL SCREEN ============ */
+        .hero-carousel-img {
+            height: calc(100vh - var(--nav-height));
+            object-fit: cover;
+        }
+        #carouselHero { height: calc(100vh - var(--nav-height)); }
+        #carouselHero .carousel-inner { height: 100%; }
+        #carouselHero .carousel-item { height: 100%; }
+
+        #carouselHero .carousel-indicators [data-bs-target] {
+            width: 40px;
+            height: 4px;
+            border-radius: 2px;
+            box-shadow: 0 0 8px rgba(0,0,0,.6);
+        }
+        #carouselHero .carousel-control-prev span,
+        #carouselHero .carousel-control-next span {
+            box-shadow: 0 2px 12px rgba(0,0,0,.25);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(8px); }
+        }
+        .scroll-indicator { animation: bounce 1.6s infinite; }
+
+        @media (max-width: 768px) {
+            :root { --nav-height: 60px; }
+        }
+
+        .produk-card { transition: transform .25s ease, box-shadow .25s ease; overflow: hidden; }
+        .produk-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(0,0,0,.1) !important; }
+        .produk-card .card-img-top { transition: transform .35s ease; }
+        .produk-card:hover .card-img-top { transform: scale(1.05); }
+        .badge-section { letter-spacing: 2px; font-weight: 600; font-size: .7rem; }
+        .accordion-button:not(.collapsed) { background-color: transparent; color: var(--uniqlo-red); box-shadow: none; }
+        .accordion-button:focus { box-shadow: none; border-color: transparent; }
+        footer a { transition: color .2s, transform .2s; display: inline-block; }
+        footer a:hover { color: #fff !important; transform: translateY(-2px); }
+        .modal-content { border-radius: 0; }
+        .btn-check:checked + .btn-outline-dark { background-color: #000; color: #fff; border-color: #000; }
+        .color-swatch-label { cursor: pointer; transition: transform .2s; }
+        .color-swatch-label:hover { transform: scale(1.1); }
+        .btn-check:checked + .color-swatch-label { outline: 2px solid var(--uniqlo-red); outline-offset: 3px; border-radius: 50%; }
+        .offcanvas { width: 400px !important; }
+        @media (max-width: 576px) { .offcanvas { width: 100% !important; } }
+        .toast-container-uniqlo { position: fixed; bottom: 1rem; right: 1rem; z-index: 9999; }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg bg-white shadow-sm sticky-top">
+    <div class="container">
+        <a href="#" class="navbar-brand fw-bold fs-4 d-flex align-items-center gap-2">
+            <img src="logo-uniqlo.png" alt="UNIQLO" height="36">
+            <span>UNIQLO</span>
+        </a>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar">
+            <div class="row w-100 align-items-center g-0 ms-lg-3">
+                <div class="col-lg-5">
+                    <ul class="navbar-nav gap-lg-3 fw-bold">
+                        <li class="nav-item"><a href="#produk" class="nav-link nav-filter" data-filter="man">Man</a></li>
+                        <li class="nav-item"><a href="#produk" class="nav-link nav-filter" data-filter="woman">Woman</a></li>
+                        <li class="nav-item"><a href="#produk" class="nav-link nav-filter" data-filter="kids">Kids</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button">Another</a>
+                            <ul class="dropdown-menu border-0 shadow-sm">
+                                <li><a class="dropdown-item nav-filter" href="#produk" data-filter="accessories">Accessories</a></li>
+                                <li><a class="dropdown-item nav-filter" href="#produk" data-filter="outer">Outer Clothing</a></li>
+                                <li><a class="dropdown-item nav-filter" href="#produk" data-filter="unisex">Unisex</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 my-2 my-lg-0">
+                    <form role="search" id="formSearch">
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-end-0"><i class="bi bi-search"></i></span>
+                            <input class="form-control bg-light border-start-0" type="search" id="inputSearch" placeholder="Cari produk...">
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-3 d-flex gap-2 justify-content-lg-end">
+                    <button class="btn btn-light position-relative" type="button" data-bs-toggle="offcanvas" data-bs-target="#canvasKeranjang">
+                        <i class="bi bi-cart-fill"></i>
+                        <span class="top-0 start-100 translate-middle position-absolute badge bg-danger rounded-pill" id="cartBadge">0</span>
+                    </button>
+                    <button class="btn btn-danger" id="btnLogin"><i class="bi bi-person-fill"></i> Login</button>
+                    <button class="btn btn-outline-danger" id="btnRegister">Register</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- OFFCANVAS KERANJANG -->
+<div class="offcanvas offcanvas-end" id="canvasKeranjang" tabindex="-1">
+    <div class="offcanvas-header border-bottom">
+        <div class="offcanvas-title fw-bold">Shopping Cart</div>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div id="cartEmpty" class="text-center text-muted py-5">
+            <i class="bi bi-cart-x" style="font-size:3rem;"></i>
+            <p class="mt-3 mb-0">Keranjang masih kosong</p>
+            <small>Yuk mulai belanja!</small>
+        </div>
+        <div id="cartItems"></div>
+        <div id="cartTotal" class="border-top pt-3 mt-3 d-none">
+            <div class="d-flex justify-content-between fw-bold fs-5 mb-3">
+                <span>Total</span>
+                <span class="text-danger" id="totalHarga">Rp 0</span>
+            </div>
+            <button class="btn btn-danger w-100 fw-bold rounded-0 py-2" id="btnCheckout">CHECKOUT</button>
+        </div>
+    </div>
+</div>
+
+<!-- CAROUSEL FULL SCREEN -->
+<section>
+    <div id="carouselHero" class="carousel slide position-relative" data-bs-interval="4000" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselHero" data-bs-slide-to="0" class="active"></button>
+            <button type="button" data-bs-target="#carouselHero" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#carouselHero" data-bs-slide-to="2"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active"><img src="promo.png" class="d-block w-100 hero-carousel-img" alt="Promo 1"></div>
+            <div class="carousel-item"><img src="promo2.jpeg" class="d-block w-100 hero-carousel-img" alt="Promo 2"></div>
+            <div class="carousel-item"><img src="promo3.jpeg" class="d-block w-100 hero-carousel-img" alt="Promo 3"></div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselHero" data-bs-slide="prev">
+            <span class="bg-white bg-opacity-75 rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="width:44px;height:44px;">
+                <i class="bi bi-chevron-left text-dark fs-5"></i>
+            </span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselHero" data-bs-slide="next">
+            <span class="bg-white bg-opacity-75 rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="width:44px;height:44px;">
+                <i class="bi bi-chevron-right text-dark fs-5"></i>
+            </span>
+        </button>
+
+        <!-- Scroll Down Indicator -->
+        <a href="#hero-cta" class="position-absolute start-50 translate-middle-x text-white text-decoration-none d-flex flex-column align-items-center"
+           style="bottom: 28px; z-index: 5;">
+            <small class="fw-bold mb-1" style="letter-spacing:3px; font-size:.7rem; text-shadow:0 2px 8px rgba(0,0,0,.6);">SCROLL</small>
+            <i class="bi bi-chevron-double-down fs-4 scroll-indicator" style="text-shadow:0 2px 8px rgba(0,0,0,.6);"></i>
+        </a>
+    </div>
+</section>
+
+<!-- HERO CTA -->
+<section class="py-5" id="hero-cta">
+    <div class="container py-lg-4">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6">
+                <span class="badge bg-danger mb-3 px-3 py-2 badge-section">SELAMAT DATANG DI UNIQLO ID</span>
+                <h1 class="display-4 fw-bold mb-3" style="line-height:1.15;">
+                    Everyday Style<br><span class="text-danger">Made Different</span>
+                </h1>
+                <p class="lead text-muted mb-4">Temukan berbagai produk unisex terbaik hanya di toko UNIQLO.</p>
+                <div class="d-flex gap-2 flex-wrap">
+                    <a href="#produk" class="btn btn-danger btn-lg px-4 rounded-0 fw-bold">
+                        <i class="bi bi-bag-fill me-2"></i>Belanja Sekarang
+                    </a>
+                    <button class="btn btn-outline-dark btn-lg px-4 rounded-0" data-bs-toggle="offcanvas" data-bs-target="#canvasKeranjang">
+                        Checkout Yang Ini <i class="bi bi-arrow-up-right ms-1"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <img src="cta.png" class="w-100 rounded-4 shadow-sm" style="height: 380px; object-fit: cover;" alt="Toko UNIQLO">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PRODUCT SECTION -->
+<section class="py-5 bg-light" id="produk">
+    <div class="container py-lg-4">
+        <div class="text-center mb-5">
+            <span class="badge bg-danger mb-2 px-3 py-2 badge-section">PRODUK TERBARU</span>
+            <h2 class="fw-bold mb-2 display-6">Koleksi Pilihan</h2>
+            <p class="text-muted mb-0">Temukan gaya pakaian terbaik untuk sehari-hari</p>
+        </div>
+
+        <div class="row g-4" id="produkGrid">
+
+            <div class="col-md-6 col-lg-4 produk-item" data-nama="kaos oversize" data-kategori="man unisex">
+                <div class="card border-0 shadow-sm h-100 bg-white produk-card">
+                    <div class="bg-light overflow-hidden">
+                        <img src="produk1.png" class="card-img-top p-3" style="height: 280px; object-fit: contain;" alt="Kaos Oversize">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold mb-1">Kaos Oversize</h5>
+                        <p class="text-muted small mb-3">Serat Poliester Daur Ulang</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="fw-bold text-danger">Rp 199.000</span>
+                            <button class="btn btn-danger btn-sm px-3 rounded-0" data-bs-toggle="modal" data-bs-target="#modalproduk1">
+                                <i class="bi bi-eye"></i> Lihat
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 produk-item" data-nama="kemeja flanel" data-kategori="man">
+                <div class="card border-0 shadow-sm h-100 bg-white produk-card">
+                    <div class="bg-light overflow-hidden">
+                        <img src="produk2.png" class="card-img-top p-3" style="height: 280px; object-fit: contain;" alt="Kemeja Flanel">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold mb-1">Kemeja Flanel</h5>
+                        <p class="text-muted small mb-3">100% Kapas</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="fw-bold text-danger">Rp 349.000</span>
+                            <button class="btn btn-danger btn-sm px-3 rounded-0" data-bs-toggle="modal" data-bs-target="#modalproduk2">
+                                <i class="bi bi-eye"></i> Lihat
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 produk-item" data-nama="jaket hoodie" data-kategori="man outer">
+                <div class="card border-0 shadow-sm h-100 bg-white produk-card">
+                    <div class="bg-light overflow-hidden">
+                        <img src="produk3.jpg" class="card-img-top p-3" style="height: 280px; object-fit: contain;" alt="Jaket Hoodie">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold mb-1">Jaket Hoodie</h5>
+                        <p class="text-muted small mb-3">Poliester, Kapas</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex flex-column">
+                                <span class="text-muted text-decoration-line-through small">Rp 599.000</span>
+                                <span class="fw-bold text-danger">Rp 449.000</span>
+                            </div>
+                            <button class="btn btn-danger btn-sm px-3 rounded-0" data-bs-toggle="modal" data-bs-target="#modalproduk3">
+                                <i class="bi bi-eye"></i> Lihat
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 produk-item" data-nama="celana sweat" data-kategori="man">
+                <div class="card border-0 shadow-sm h-100 bg-white produk-card">
+                    <div class="bg-light overflow-hidden">
+                        <img src="produk4.jpg" class="card-img-top p-3" style="height: 280px; object-fit: contain;" alt="Celana Sweat">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold mb-1">Celana Sweat</h5>
+                        <p class="text-muted small mb-3">Poliester, Kapas</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex flex-column">
+                                <span class="text-muted text-decoration-line-through small">Rp 499.000</span>
+                                <span class="fw-bold text-danger">Rp 349.000</span>
+                            </div>
+                            <button class="btn btn-danger btn-sm px-3 rounded-0" data-bs-toggle="modal" data-bs-target="#modalproduk4">
+                                <i class="bi bi-eye"></i> Lihat
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 produk-item" data-nama="polo shirt" data-kategori="man">
+                <div class="card border-0 shadow-sm h-100 bg-white produk-card">
+                    <div class="bg-light overflow-hidden">
+                        <img src="produk5.jpg" class="card-img-top p-3" style="height: 280px; object-fit: contain;" alt="Polo Shirt">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold mb-1">Polo Shirt</h5>
+                        <p class="text-muted small mb-3">Poliester, Nilon</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="fw-bold text-danger">Rp 299.000</span>
+                            <button class="btn btn-danger btn-sm px-3 rounded-0" data-bs-toggle="modal" data-bs-target="#modalproduk5">
+                                <i class="bi bi-eye"></i> Lihat
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 produk-item" data-nama="jaket blouson" data-kategori="man outer">
+                <div class="card border-0 shadow-sm h-100 bg-white produk-card">
+                    <div class="bg-light overflow-hidden">
+                        <img src="produk6.jpg" class="card-img-top p-3" style="height: 280px; object-fit: contain;" alt="Jaket Blouson">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold mb-1">Jaket Blouson</h5>
+                        <p class="text-muted small mb-3">Kapas, Nilon</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex flex-column">
+                                <span class="text-muted text-decoration-line-through small">Rp 699.000</span>
+                                <span class="fw-bold text-danger">Rp 479.000</span>
+                            </div>
+                            <button class="btn btn-danger btn-sm px-3 rounded-0" data-bs-toggle="modal" data-bs-target="#modalproduk6">
+                                <i class="bi bi-eye"></i> Lihat
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="text-center mt-5">
+            <button class="btn btn-outline-danger btn-lg px-4 rounded-0" id="btnLihatSemua">
+                Lihat Semua Produk <i class="bi bi-arrow-right ms-1"></i>
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section class="py-5" id="faq">
+    <div class="container py-lg-4">
+        <div class="text-center mb-5">
+            <span class="badge bg-danger mb-2 px-3 py-2 badge-section">FAQ</span>
+            <h2 class="fw-bold mb-2 display-6">Pertanyaan yang Sering Diajukan</h2>
+            <p class="text-muted mb-0">Temukan jawaban atas pertanyaan umum seputar belanja di UNIQLO ID</p>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <div class="accordion accordion-flush" id="faqAccordion">
+                    <div class="accordion-item border mb-2">
+                        <h2 class="accordion-header"><button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faq1"><i class="bi bi-question-circle text-danger me-3"></i>Bagaimana cara memesan produk?</button></h2>
+                        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion"><div class="accordion-body text-muted">Pilih produk, klik <strong>Lihat</strong>, pilih warna & ukuran, lalu klik <strong>Tambah ke Keranjang</strong>. Buka keranjang di kanan atas untuk checkout.</div></div>
+                    </div>
+                    <div class="accordion-item border mb-2">
+                        <h2 class="accordion-header"><button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faq2"><i class="bi bi-question-circle text-danger me-3"></i>Apakah bisa tukar ukuran?</button></h2>
+                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body text-muted">Bisa! Tukar ukuran maksimal 14 hari setelah barang diterima, dengan syarat label masih menempel dan barang belum dicuci.</div></div>
+                    </div>
+                    <div class="accordion-item border mb-2">
+                        <h2 class="accordion-header"><button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faq3"><i class="bi bi-question-circle text-danger me-3"></i>Metode pembayaran apa saja yang tersedia?</button></h2>
+                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body text-muted">Transfer bank (BCA, Mandiri, BNI, BRI), e-wallet (GoPay, OVO, DANA, ShopeePay), kartu kredit/debit, dan COD untuk area tertentu.</div></div>
+                    </div>
+                    <div class="accordion-item border mb-2">
+                        <h2 class="accordion-header"><button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faq4"><i class="bi bi-question-circle text-danger me-3"></i>Berapa lama pengiriman?</button></h2>
+                        <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body text-muted">Pulau Jawa 1–3 hari kerja, luar Jawa 3–7 hari kerja. Gratis ongkir untuk pembelian minimal Rp 300.000.</div></div>
+                    </div>
+                    <div class="accordion-item border mb-2">
+                        <h2 class="accordion-header"><button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faq5"><i class="bi bi-question-circle text-danger me-3"></i>Apakah produk original?</button></h2>
+                        <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body text-muted">100% original. Semua produk dikirim langsung dari gudang resmi UNIQLO Indonesia dan bergaransi resmi.</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-dark text-white pt-5 pb-3">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <h5 class="fw-bold mb-3" style="letter-spacing:2px;">UNIQLO ID</h5>
+                <p class="text-white-50 small mb-3">Everyday Style, Made Different. Temukan berbagai produk unisex berkualitas dengan harga terjangkau.</p>
+                <div class="d-flex gap-3">
+                    <a href="https://facebook.com" target="_blank" class="text-white-50 fs-5" title="Facebook"><i class="bi bi-facebook"></i></a>
+                    <a href="https://instagram.com" target="_blank" class="text-white-50 fs-5" title="Instagram"><i class="bi bi-instagram"></i></a>
+                    <a href="https://twitter.com" target="_blank" class="text-white-50 fs-5" title="Twitter"><i class="bi bi-twitter-x"></i></a>
+                    <a href="https://youtube.com" target="_blank" class="text-white-50 fs-5" title="YouTube"><i class="bi bi-youtube"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-6 col-6">
+                <h6 class="fw-bold mb-3">Belanja</h6>
+                <ul class="list-unstyled small">
+                    <li class="mb-2"><a href="#produk" class="text-white-50 text-decoration-none nav-filter" data-filter="man">Man</a></li>
+                    <li class="mb-2"><a href="#produk" class="text-white-50 text-decoration-none nav-filter" data-filter="woman">Woman</a></li>
+                    <li class="mb-2"><a href="#produk" class="text-white-50 text-decoration-none nav-filter" data-filter="kids">Kids</a></li>
+                    <li class="mb-2"><a href="#produk" class="text-white-50 text-decoration-none nav-filter" data-filter="unisex">Unisex</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-2 col-md-6 col-6">
+                <h6 class="fw-bold mb-3">Bantuan</h6>
+                <ul class="list-unstyled small">
+                    <li class="mb-2"><a href="#faq" class="text-white-50 text-decoration-none">FAQ</a></li>
+                    <li class="mb-2"><a href="#faq" class="text-white-50 text-decoration-none">Panduan Ukuran</a></li>
+                    <li class="mb-2"><a href="#faq" class="text-white-50 text-decoration-none">Kebijakan Return</a></li>
+                    <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none" id="footerKontak">Hubungi Kami</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <h6 class="fw-bold mb-3">Newsletter</h6>
+                <p class="text-white-50 small">Dapatkan promo & produk baru langsung ke email kamu.</p>
+                <form id="formNewsletter" class="d-flex gap-2">
+                    <input type="email" class="form-control rounded-0" id="emailNewsletter" placeholder="Email kamu" required>
+                    <button class="btn btn-danger rounded-0 px-3" type="submit"><i class="bi bi-send"></i></button>
+                </form>
+            </div>
+        </div>
+        <hr class="border-secondary mt-4">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center small text-white-50">
+            <div>© 2026 UNIQLO ID. All rights reserved.</div>
+            <div class="d-flex gap-3 mt-2 mt-md-0">
+                <a href="#" class="text-white-50 text-decoration-none">Privacy Policy</a>
+                <a href="#" class="text-white-50 text-decoration-none">Terms of Service</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- MODAL PRODUK 1 -->
+<div class="modal fade" id="modalproduk1" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content border-0 rounded-0">
+      <div class="modal-header border-0 pb-0">
+        <nav aria-label="breadcrumb"><ol class="breadcrumb mb-0 small">
+          <li class="breadcrumb-item"><button type="button" class="btn btn-link p-0 small align-baseline text-danger text-decoration-none" data-bs-dismiss="modal">Home</button></li>
+          <li class="breadcrumb-item">Man</li><li class="breadcrumb-item active">Kaos Oversize</li>
+        </ol></nav>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row g-4 g-lg-5">
+          <div class="col-lg-7">
+            <div id="galeri1" class="carousel slide bg-light" data-bs-theme="dark">
+              <div class="carousel-indicators">
+                <button type="button" data-bs-target="#galeri1" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#galeri1" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#galeri1" data-bs-slide-to="2"></button>
+              </div>
+              <div class="carousel-inner">
+                <div class="carousel-item active"><div class="ratio ratio-4x3"><img src="produk1.png" class="object-fit-contain p-3" alt="Kaos Oversize"></div></div>
+                <div class="carousel-item"><div class="ratio ratio-4x3"><img src="produk1.png" class="object-fit-contain p-3" alt="Kaos Oversize"></div></div>
+                <div class="carousel-item"><div class="ratio ratio-4x3"><img src="produk1.png" class="object-fit-contain p-3" alt="Kaos Oversize"></div></div>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#galeri1" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
+              <button class="carousel-control-next" type="button" data-bs-target="#galeri1" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
+            </div>
+            <div class="accordion accordion-flush border-top mt-4" id="acc1">
+              <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button fw-bold px-0" type="button" data-bs-toggle="collapse" data-bs-target="#acc1desk">Deskripsi Produk</button></h2>
+                <div id="acc1desk" class="accordion-collapse collapse show" data-bs-parent="#acc1"><div class="accordion-body px-0 small">Kaos potongan oversize yang longgar dan nyaman dipakai seharian.</div></div>
+              </div>
+              <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed fw-bold px-0" type="button" data-bs-toggle="collapse" data-bs-target="#acc1bahan">Material &amp; Perawatan</button></h2>
+                <div id="acc1bahan" class="accordion-collapse collapse" data-bs-parent="#acc1"><div class="accordion-body px-0 small"><ul class="mb-0"><li>Bahan: Serat Poliester Daur Ulang</li><li>Cuci air dingin</li><li>Jangan pakai pemutih</li></ul></div></div>
+              </div>
+              <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed fw-bold px-0" type="button" data-bs-toggle="collapse" data-bs-target="#acc1ukuran">Panduan Ukuran</button></h2>
+                <div id="acc1ukuran" class="accordion-collapse collapse" data-bs-parent="#acc1"><div class="accordion-body px-0">
+                  <table class="table table-sm table-bordered text-center small mb-1"><thead class="table-light"><tr><th>Ukuran</th><th>Tinggi</th><th>Berat</th></tr></thead><tbody><tr><td>S</td><td>155-165</td><td>50-58</td></tr><tr><td>M</td><td>160-170</td><td>58-66</td></tr><tr><td>L</td><td>165-175</td><td>66-74</td></tr><tr><td>XL</td><td>170-180</td><td>74-82</td></tr><tr><td>XXL</td><td>175-185</td><td>82-92</td></tr></tbody></table>
+                </div></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-5">
+            <p class="text-uppercase text-muted small fw-bold mb-1">Man Series</p>
+            <h3 class="fw-bold mb-2">Kaos Oversize</h3>
+            <div class="d-flex align-items-center gap-2 mb-3 small">
+              <span class="text-warning"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i></span>
+              <span class="text-muted">4.5 (128 ulasan)</span>
+            </div>
+            <div class="d-flex align-items-center flex-wrap gap-2 mb-1"><span class="fs-3 fw-bold text-danger">Rp 199.000</span></div>
+            <p class="text-muted small mb-3">Bahan: Serat Poliester Daur Ulang</p><hr>
+            <div class="mb-4">
+              <div class="fw-bold small text-uppercase mb-2">Warna</div>
+              <div class="d-flex flex-wrap gap-3">
+                <div class="text-center"><input type="radio" class="btn-check" name="warna1" id="w1-0" checked><label class="btn btn-outline-dark border-0 rounded-circle p-1 color-swatch-label" for="w1-0"><span class="d-block rounded-circle border" style="width:30px;height:30px;background:#000;"></span></label><div class="small text-muted mt-1">Hitam</div></div>
+                <div class="text-center"><input type="radio" class="btn-check" name="warna1" id="w1-1"><label class="btn btn-outline-dark border-0 rounded-circle p-1 color-swatch-label" for="w1-1"><span class="d-block rounded-circle border" style="width:30px;height:30px;background:#fff;"></span></label><div class="small text-muted mt-1">Putih</div></div>
+                <div class="text-center"><input type="radio" class="btn-check" name="warna1" id="w1-2"><label class="btn btn-outline-dark border-0 rounded-circle p-1 color-swatch-label" for="w1-2"><span class="d-block rounded-circle border" style="width:30px;height:30px;background:#1e3a8a;"></span></label><div class="small text-muted mt-1">Navy</div></div>
+                <div class="text-center"><input type="radio" class="btn-check" name="warna1" id="w1-3"><label class="btn btn-outline-dark border-0 rounded-circle p-1 color-swatch-label" for="w1-3"><span class="d-block rounded-circle border" style="width:30px;height:30px;background:#dc2626;"></span></label><div class="small text-muted mt-1">Merah</div></div>
+              </div>
+            </div>
+            <div class="mb-4">
+              <div class="fw-bold small text-uppercase mb-2">Ukuran</div>
+              <div class="d-flex flex-wrap gap-2">
+                <input type="radio" class="btn-check" name="size1" id="s1s"><label class="btn btn-outline-dark rounded-0 px-3" for="s1s">S</label>
+                <input type="radio" class="btn-check" name="size1" id="s1m" checked><label class="btn btn-outline-dark rounded-0 px-3" for="s1m">M</label>
+                <input type="radio" class="btn-check" name="size1" id="s1l"><label class="btn btn-outline-dark rounded-0 px-3" for="s1l">L</label>
+                <input type="radio" class="btn-check" name="size1" id="s1xl"><label class="btn btn-outline-dark rounded-0 px-3" for="s1xl">XL</label>
+                <input type="radio" class="btn-check" name="size1" id="s1xxl"><label class="btn btn-outline-dark rounded-0 px-3" for="s1xxl">XXL</label>
+              </div>
+            </div>
+            <div class="mb-4">
+              <div class="fw-bold small text-uppercase mb-2">Jumlah</div>
+              <input type="number" class="form-control rounded-0 qty-input" value="1" min="1" max="10" style="width:100px;">
+            </div>
+            <div class="d-flex gap-2 mb-4">
+              <button type="button" class="btn btn-danger btn-lg rounded-0 flex-grow-1 fw-bold btn-add-cart" data-id="1" data-nama="Kaos Oversize" data-harga="199000" data-gambar="produk1.png">
+                <i class="bi bi-bag-plus me-2"></i>TAMBAH KE KERANJANG
+              </button>
+            </div>
+            <ul class="list-unstyled small text-muted mb-0">
+              <li class="mb-1"><i class="bi bi-truck me-2"></i>Pengiriman ke seluruh Indonesia</li>
+              <li><i class="bi bi-shield-check me-2"></i>Pembayaran aman</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL PRODUK 2 -->
+<div class="modal fade" id="modalproduk2" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content border-0 rounded-0">
+      <div class="modal-header border-0 pb-0">
+        <nav aria-label="breadcrumb"><ol class="breadcrumb mb-0 small">
+          <li class="breadcrumb-item"><button type="button" class="btn btn-link p-0 small align-baseline text-danger text-decoration-none" data-bs-dismiss="modal">Home</button></li>
+          <li class="breadcrumb-item">Man</li><li class="breadcrumb-item active">Kemeja Flanel</li>
+        </ol></nav>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row g-4 g-lg-5">
+          <div class="col-lg-7">
+            <div id="galeri2" class="carousel slide bg-light" data-bs-theme="dark">
+              <div class="carousel-indicators">
+                <button type="button" data-bs-target="#galeri2" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#galeri2" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#galeri2" data-bs-slide-to="2"></button>
+              </div>
+              <div class="carousel-inner">
+                <div class="carousel-item active"><div class="ratio ratio-4x3"><img src="produk2.png" class="object-fit-contain p-3" alt="Kemeja Flanel"></div></div>
+                <div class="carousel-item"><div class="ratio ratio-4x3"><img src="produk2.png" class="object-fit-contain p-3" alt="Kemeja Flanel"></div></div>
+                <div class="carousel-item"><div class="ratio ratio-4x3"><img src="produk2.png" class="object-fit-contain p-3" alt="Kemeja Flanel"></div></div>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#galeri2" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
+              <button class="carousel-control-next" type="button" data-bs-target="#galeri2" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
+            </div>
+            <div class="accordion accordion-flush border-top mt-4" id="acc2">
+              <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button fw-bold px-0" type="button" data-bs-toggle="collapse" data-bs-target="#acc2desk">Deskripsi Produk</button></h2>
+                <div id="acc2desk" class="accordion-collapse collapse show" data-bs-parent="#acc2"><div class="accordion-body px-0 small">Kemeja flanel 100% kapas yang lembut dan breathable.</div></div>
+              </div>
+              <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed fw-bold px-0" type="button" data-bs-toggle="collapse" data-bs-target="#acc2bahan">Material &amp; Perawatan</button></h2>
+                <div id="acc2bahan" class="accordion-collapse collapse" data-bs-parent="#acc2"><div class="accordion-body px-0 small"><ul class="mb-0"><li>Bahan: 100% Kapas</li><li>Cuci air dingin</li></ul></div></div>
+              </div>
+              <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed fw-bold px-0" type="button" data-bs-toggle="collapse" data-bs-target="#acc2ukuran">Panduan Ukuran</button></h2>
+                <div id="acc2ukuran" class="accordion-collapse collapse" data-bs-parent="#acc2"><div class="accordion-body px-0">
+                  <table class="table table-sm table-bordered text-center small mb-1"><thead class="table-light"><tr><th>Ukuran</th><th>Tinggi</th><th>Berat</th></tr></thead><tbody><tr><td>S</td><td>155-165</td><td>50-58</td></tr><tr><td>M</td><td>160-170</td><td>58-66</td></tr><tr><td>L</td><td>165-175</td><td>66-74</td></tr><tr><td>XL</td><td>170-180</td><td>74-82</td></tr><tr><td>XXL</td><td>175-185</td><td>82-92</td></tr></tbody></table>
+                </div></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-5">
+            <p class="text-uppercase text-muted small fw-bold mb-1">Man Series</p>
+            <h3 class="fw-bold mb-2">Kemeja Flanel</h3>
+            <div class="d-flex align-items-center gap-2 mb-3 small">
+              <span class="text-warning"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i></span>
+              <span class="text-muted">4.7 (86 ulasan)</span>
+            </div>
+            <div class="d-flex align-items-center flex-wrap gap-2 mb-1"><span class="fs-3 fw-bold text-danger">Rp 349.000</span></div>
+            <p class="text-muted small mb-3">Bahan: 100% Kapas</p><hr>
+            <div class="mb-4">
+              <div class="fw-bold small text-uppercase mb-2">Warna</div>
+              <div class="d-flex flex-wrap gap-3">
+                <div class="text-center"><input type="radio" class="btn-check" name="warna2" id="w2-0" checked><label class="btn btn-outline-dark border-0 rounded-circle p-1 color-swatch-label" for="w2-0"><span class="d-block rounded-circle border" style="width:30px;height:30px;background:#dc2626;"></span></label><div class="small text-muted mt-1">Merah</div></div>
+                <div class="text-center"><input type="radio" class="btn-check" name="warna2" id="w2-1"><label class="btn btn-outline-dark border-0 rounded-circle p-1 color-swatch-label" for="w2-1"><span class="d-block rounded-circle border" style="width:30px;height:30px;background:#1e3a8a;"></span></label><div class="small text-muted mt-1">Navy</div></div>
+                <div class="text-center"><input type="radio" class="btn-check" name="warna2" id="w2-2"><label class="btn btn-outline-dark border-0 rounded-circle p-1 color-swatch-label" for="w2-2"><span class="d-block rounded-circle border" style="width:30px;height:30px;background:#16a34a;"></span></label><div class="small text-muted mt-1">Hijau</div></div>
+              </div>
+            </div>
+            <div class="mb-4">
+              <div class="fw-bold small text-uppercase mb-2">Ukuran</div>
+              <div class="d-flex flex-wrap gap-2">
+                <input type="radio" class="btn-check" name="size2" id="s2s"><label class="btn btn-outline-dark rounded-0 px-3" for="s2s">S</label>
+                <input type="radio" class="btn-check" name="size2" id="s2m" checked><label class="btn btn-outline-dark rounded-0 px-3" for="s2m">M</label>
+                <input type="radio" class="btn-check" name="size2" id="s2l"><label class="btn btn-outline-dark rounded-0 px-3" for="s2l">L</label>
+                <input type="radio" class="btn-check" name="size2" id="s2xl"><label class="btn btn-outline-dark rounded-0 px-3" for="s2xl">XL</label>
+                <input type="radio" class="btn-check" name="size2" id="s2xxl"><label class="btn btn-outline-dark rounded-0 px-3" for="s2xxl">XXL</label>
+              </div>
+            </div>
+            <div class="mb-4">
+              <div class="fw-bold small text-uppercase mb-2">Jumlah</div>
+              <input type="number" class="form-control rounded-0 qty-input" value="1" min="1" max="10" style="width:100px;">
+            </div>
+            <div class="d-flex gap-2 mb-4">
+              <button type="button" class="btn btn-danger btn-lg rounded-0 flex-grow-1 fw-bold btn-add-cart" data-id="2" data-nama="Kemeja Flanel" data-harga="349000" data-gambar="produk2.png">
+                <i class="bi bi-bag-plus me-2"></i>TAMBAH KE KERANJANG
+              </button>
+            </div>
+            <ul class="list-unstyled small text-muted mb-0">
+              <li class="mb-1"><i class="bi bi-truck me-2"></i>Pengiriman ke seluruh Indonesia</li>
+              <li><i class="bi bi-shield-check me-2"></i>Pembayaran aman</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL PRODUK 3 -->
+<div class="modal fade" id="modalproduk3" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content border-0 rounded-0">
+      <div class="modal-header border-0 pb-0">
+        <nav aria-label="breadcrumb"><ol class="breadcrumb mb-0 small">
+          <li class="breadcrumb-item"><button type="button" class="btn btn-link p-0 small align-baseline text-danger text-decoration-none" data-bs-dismiss="modal">Home</button></li>
+          <li class="breadcrumb-item">Man</li><li class="breadcrumb-item active">Jaket Hoodie</li>
+        </ol></nav>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row g-4 g-lg-5">
+          <div class="col-lg-7">
+            <div id="galeri3" class="carousel slide bg-light" data-bs-theme="dark">
+              <div class="carousel-indicators">
+                <button type="button" data-bs-target="#galeri3" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#galeri3" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#galeri3" data-bs-slide-to="2"></button>
+              </div>
+              <div class="carousel-inner">
+                <div class="carousel-item active"><div class="ratio ratio-4x3"><img src="produk3.jpg" class="object-fit-contain p-3" alt="Jaket Hoodie"></div></div>
+                <div class="carousel-item"><div class="ratio ratio-4x3"><img src="produk3.jpg" class="object-fit-contain p-3" alt="Jaket Hoodie"></div></div>
+                <div class="carousel-item"><div class="ratio ratio-4x3"><img src="produk3.jpg" class="object-fit-contain p-3" alt="Jaket Hoodie"></div></div>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#galeri3" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
+              <button class="carousel-control-next" type="button" data-bs-target="#galeri3" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
+            </div>
+            <div class="accordion accordion-flush border-top mt-4" id="acc3">
+              <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button fw-bold px-0" type="button" data-bs-toggle="collapse" data-bs-target="#acc3desk">Deskripsi Produk</button></h2>
+                <div id="acc3desk" class="accordion-collapse collapse show" data-bs-parent="#acc3"><div class="accordion-body px-0 small">Jaket hoodie hangat dan nyaman dengan tudung.</div></div>
+              </div>
+              <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed fw-bold px-0" type="button" data-bs-toggle="collapse" data-bs-target="#acc3bahan">Material &amp; Perawatan</button></h2>
+                <div id="acc3bahan" class="accordion-collapse collapse" data-bs-parent="#acc3"><div class="accordion-body px-0 small"><ul class="mb-0"><li>Bahan: Poliester, Kapas</li><li>Cuci air dingin</li></ul></div></div>
+              </div>
+              <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed fw-bold px-0" type="button" data-bs-toggle="collapse" data-bs-target="#acc3ukuran">Panduan Ukuran</button></h2>
+                <div id="acc3ukuran" class="accordion-collapse collapse" data-bs-parent="#acc3"><div class="accordion-body px-0">
+                  <table class="table table-sm table-bordered text-center small mb-1"><thead class="table-light"><tr><th>Ukuran</th><th>Tinggi</th><th>Berat</th></tr></thead><tbody><tr><td>S</td><td>155-165</td><td>50-58</td></tr><tr><td>M</td><td>160-170</td><td>58-66</td></tr><tr><td>L</td><td>165-175</td><td>66-74</td></tr><tr><td>XL</td><td>170-180</td><td>74-82</td></tr><tr><td>XXL</td><td>175-185</td><td>82-92</td></tr></tbody></table>
+                </div></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-5">
+            <p class="text-uppercase text-muted small fw-bold mb-1">Man Series</p>
+            <h3 class="fw-bold mb-2">Jaket Hoodie</h3>
+            <div class="d-flex align-items-center gap-2 mb-3 small">
+              <span class="text-warning"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i></span>
+              <span class="text-muted">4.4 (212 ulasan)</span>
+            </div>
+            <div class="d-flex align-items-center flex-wrap gap-2 mb-1">
+              <span class="fs-3 fw-bold text-danger">Rp 449.000</span>
+              <span class="text-muted text-decoration-line-through">Rp 599.000</span>
+              <span class="badge bg-danger">-25%</span>
+            </div>
+            <p class="text-muted small mb-3">Bahan: Poliester, Kapas</p><hr>
+            <div class="mb-4">
+              <div class="fw-bold small text-uppercase mb-2">Warna</div>
+              <div class="d-flex flex-wrap gap-3">
+                <div class="text-center"><input type="radio" class="btn-check" name="warna3" id="w3-0" checked><label class="btn btn-outline-dark border-0 rounded-circle p-1 color-swatch-label" for="w3-0"><span class="d-block rounded-circle border" style="width:30px;height:30px;background:#000;"></span></label><div class="small text-muted mt-1">Hitam</div></div>
+                <div class="text-center"><input type="radio" class="btn-check" name="warna3" id="w3-1"><label class="btn btn-outline-dark border-0 rounded-circle p-1 color-swatch-label" for="w3-1"><span class="d-block rounded-circle border" style="width:30px;height:30px;background:#6b7280;"></span></label><div class="small text-muted mt-1">Abu</div></div>
+                <div class="text-center"><input type="radio" class="btn-check" name="warna3" id="w3-2"><label class="btn btn-outline-dark border-0 rounded-circle p-1 color-swatch-label" for="w3-2"><span class="d-block rounded-circle border" style="width:30px;height:30px;background:#1e3a8a;"></span></label><div class="small text-muted mt-1">Navy</div></div>
+              </div>
+            </div>
+            <div class="mb-4">
+              <div class="fw-bold small text-uppercase mb-2">Ukuran</div>
+              <div class="d-flex flex-wrap gap-2">
+                <input type="radio" class="btn-check" name="size3" id="s3s"><label class="btn btn-outline-dark rounded-0 px-3" for="s3s">S</label>
+                <input type="radio" class="btn-check" name="size3" id="s3m" checked><label class="btn btn-outline-dark rounded-0 px-3" for="s3m">M</label>
+                <input type="radio" class="btn-check" name="size3" id="s3l"><label class="btn btn-outline-dark rounded-0 px-3" for="s3l">L</label>
+                <input type="radio" class="btn-check" name="size3" id="s3xl"><label class="btn btn-outline-dark rounded-0 px-3" for="s3xl">XL</label>
+                <input type="radio" class="btn-check" name="size3" id="s3xxl"><label class="btn btn-outline-dark rounded-0 px-3" for="s3xxl">XXL</label>
+              </div>
+            </div>
+            <div class="mb-4">
+              <div class="fw-bold small text-uppercase mb-2">Jumlah</div>
+              <input type="number" class="form-control rounded-0 qty-input" value="1" min="1" max="10" style="width:100px;">
+            </div>
+            <div class="d-flex gap-2 mb-4">
+              <button type="button" class="btn btn-danger btn-lg rounded-0 flex-grow-1 fw-bold btn-add-cart" data-id="3" data-nama="Jaket Hoodie" data-harga="449000" data-gambar="produk3.jpg">
+                <i class="bi bi-bag-plus me-2"></i>TAMBAH KE KERANJANG
+              </button>
+            </div>
+            <ul class="list-unstyled small text-muted mb-0">
+              <li class="mb-1"><i class="bi bi-truck me-2"></i>Pengiriman ke seluruh Indonesia</li>
+              <li><i class="bi bi-shield-check me-2"></i>Pembayaran aman</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL PRODUK 4 -->
+<div class="modal fade" id="modalproduk4" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content border-0 rounded-0">
+      <div class="modal-header border-0 pb-0">
+        <nav aria-label="breadcrumb"><ol class="breadcrumb mb-0 small">
+          <li class="breadcrumb-item"><button type="button" class="btn btn-link p-0 small align-baseline text-danger text-decoration-none" data-bs-dismiss="modal">Home</button></li>
+          <li class="breadcrumb-item">Man</li><li class="breadcrumb-item active">Celana Sweat</li>
+        </ol></nav>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row g-4 g-lg-5">
+          <div class="col-lg-7">
+            <div id="galeri4" class="carousel slide bg-light" data-bs-theme="dark">
+              <div class="carousel-indicators">
+                <button type="button" data-bs-target="#galeri4" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#galeri4" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#galeri4" data-bs-slide-to="2"></button>
+              </div>
+              <div class="carousel-inner">
+                <div class="carousel-item active"><div class="ratio ratio-4x3"><img src="produk4.jpg" class="object-fit-contain p-3" alt="Celana Sweat"></div></div>
+                <div class="carousel-item"><div class="ratio ratio-4x3"><img src="produk4.jpg" class="object-fit-contain p-3" alt="Celana Sweat"></div></div>
+                <div class="carousel-item"><div class="ratio ratio-4x3"><img src="produk4.jpg" class="object-fit-contain p-3" alt="Celana Sweat"></div></div>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#galeri4" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
+              <button class="carousel-control-next" type="button" data-bs-target="#galeri4" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
+            </div>
+            <div class="accordion accordion-flush border-top mt-4" id="acc4">
+              <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button fw-bold px-0" type="button" data-bs-toggle="collapse" data-bs-target="#acc4desk">Deskripsi Produk</button></h2>
+                <div id="acc4desk" class="accordion-collapse collapse show" data-bs-parent="#acc4"><div class="accordion-body px-0 small">Celana sweat elastis dan nyaman untuk santai.</div></div>
+              </div>
+              <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed fw-bold px-0" type="button" data-bs-toggle="collapse" data-bs-target="#acc4bahan">Material &amp; Perawatan</button></h2>
+                <div id="acc4bahan" class="accordion-collapse collapse" data-bs-parent="#acc4"><div class="accordion-body px-0 small"><ul class="mb-0"><li>Bahan: Poliester, Kapas</li><li>Cuci air dingin</li></ul></div></div>
+              </div>
+              <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed fw-bold px-0" type="button" data-bs-toggle="collapse" data-bs-target="#acc4ukuran">Panduan Ukuran</button></h2>
+                <div id="acc4ukuran" class="accordion-collapse collapse" data-bs-parent="#acc4"><div class="accordion-body px-0">
+                  <table class="table table-sm table-bordered text-center small mb-1"><thead class="table-light"><tr><th>Ukuran</th><th>Tinggi</th><th>Berat</th></tr></thead><tbody><tr><td>S</td><td>155-165</td><td>50-58</td></tr><tr><td>M</td><td>160-170</td><td>58-66</td></tr><tr><td>L</td><td>165-175</td><td>66-74</td></tr><tr><td>XL</td><td>170-180</td><td>74-82</td></tr><tr><td>XXL</td><td>175-185</td><td>82-92</td></tr></tbody></table>
+                </div></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-5">
+            <p class="text-uppercase text-muted small fw-bold mb-1">Man Series</p>
+            <h3 class="fw-bold mb-2">Celana Sweat</h3>
+            <div class="d-flex align-items-center gap-2 mb-3 small">
+              <span class="text-warning"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i></span>
+              <span class="text-muted">4.6 (97 ulasan)</span>
+            </div>
+            <div class="d-flex align-items-center flex-wrap gap-2 mb-1">
+              <span class="fs-3 fw-bold text-danger">Rp 349.000</span>
+              <span class="text-muted text-decoration-line-through">Rp 499.000</span>
+              <span class="badge bg-danger">-30%</span>
+            </div>
+            <p class="text-muted small mb-3">Bahan: Poliester, Kapas</p><hr>
+            <div class="mb-4">
+              <div class="fw-bold small text-uppercase mb-2">Warna</div>
+              <div class="d-flex flex-wrap gap-3">
+                <div class="text-center"><input type="radio" class="btn-check" name="warna4" id="w4-0" checked><label class="btn btn-outline-dark border-0 rounded-circle p-1 color-swatch-label" for="w4-0"><span class="d-block rounded-circle border" style="width:30px;height:30px;background:#000;"></span></label><div class="small text-muted mt-1">Hitam</div></div>
+                <div class="text-center"><input type="radio" class="btn-check" name="warna4" id="w4-1"><label class="btn btn-outline-dark border-0 rounded-circle p-1 color-swatch-label" for="w4-1"><span class="d-block rounded-circle border" style="width:30px;height:30px;background:#6b7280;"></span></label><div class="small text-muted mt-1">Abu</div></div>
+                <div class="text-center"><input type="radio" class="btn-check" name="warna4" id="w4-2"><label class="btn btn-outline-dark border-0 rounded-circle p-1 color-swatch-label" for="w4-2"><span class="d-block rounded-circle border" style="width:30px;height:30px;background:#1e3a8a;"></span></label><div class="small text-muted mt-1">Navy</div></div>
+              </div>
+            </div>
+            <div class="mb-4">
+              <div class="fw-bold small text-uppercase mb-2">Ukuran</div>
+              <div class="d-flex flex-wrap gap-2">
+                <input type="radio" class="btn-check" name="size4" id="s4s"><label class="btn btn-outline-dark rounded-0 px-3" for="s4s">S</label>
+                <input type="radio" class="btn-check" name="size4" id="s4m" checked><label class="btn btn-outline-dark rounded-0 px-3" for="s4m">M</label>
+                <input type="radio" class="btn-check" name="size4" id="s4l"><label class="btn btn-outline-dark rounded-0 px-3" for="s4l">L</label>
+                <input type="radio" class="btn-check" name="size4" id="s4xl"><label class="btn btn-outline-dark rounded-0 px-3" for="s4xl">XL</label>
+                <input type="radio" class="btn-check" name="size4" id="s4xxl"><label class="btn btn-outline-dark rounded-0 px-3" for="s4xxl">XXL</label>
+              </div>
+            </div>
+            <div class="mb-4">
+              <div class="fw-bold small text-uppercase mb-2">Jumlah</div>
+              <input type="number" class="form-control rounded-0 qty-input" value="1" min="1" max="10" style="width:100px;">
+            </div>
+            <div class="d-flex gap-2 mb-4">
+              <button type="button" class="btn btn-danger btn-lg rounded-0 flex-grow-1 fw-bold btn-add-cart" data-id="4" data-nama="Celana Sweat" data-harga="349000" data-gambar="produk4.jpg">
+                <i class="bi bi-bag-plus me-2"></i>TAMBAH KE KERANJANG
+              </button>
+            </div>
+            <ul class="list-unstyled small text-muted mb-0">
+              <li class="mb-1"><i class="bi bi-truck me-2"></i>Pengiriman ke seluruh Indonesia</li>
+              <li><i class="bi bi-shield-check me-2"></i>Pembayaran aman</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL PRODUK 5 -->
+<div class="modal fade" id="modalproduk5" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content border-0 rounded-0">
+      <div class="modal-header border-0 pb-0">
+        <nav aria-label="breadcrumb"><ol class="breadcrumb mb-0 small">
+          <li class="breadcrumb-item"><button type="button" class="btn btn-link p-0 small align-baseline text-danger text-decoration-none" data-bs-dismiss="modal">Home</button></li>
+          <li class="breadcrumb-item">Man</li><li class="breadcrumb-item active">Polo Shirt</li>
+        </ol></nav>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row g-4 g-lg-5">
+          <div class="col-lg-7">
+            <div id="galeri5" class="carousel slide bg-light" data-bs-theme="dark">
+              <div class="carousel-indicators">
+                <button type="button" data-bs-target="#galeri5" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#galeri5" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#galeri5" data-bs-slide-to="2"></button>
+              </div>
+              <div class="carousel-inner">
+                <div class="carousel-item active"><div class="ratio ratio-4x3"><img src="produk5.jpg" class="object-fit-contain p-3" alt="Polo Shirt"></div></div>
+                <div class="carousel-item"><div class="ratio ratio-4x3"><img src="produk5.jpg" class="object-fit-contain p-3" alt="Polo Shirt"></div></div>
+                <div class="carousel-item"><div class="ratio ratio-4x3"><img src="produk5.jpg" class="object-fit-contain p-3" alt="Polo Shirt"></div></div>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#galeri5" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
+              <button class="carousel-control-next" type="button" data-bs-target="#galeri5" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
+            </div>
+            <div class="accordion accordion-flush border-top mt-4" id="acc5">
+              <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button fw-bold px-0" type="button" data-bs-toggle="collapse" data-bs-target="#acc5desk">Deskripsi Produk</button></h2>
+                <div id="acc5desk" class="accordion-collapse collapse show" data-bs-parent="#acc5"><div class="accordion-body px-0 small">Polo shirt ringan, cepat kering, tidak mudah kusut.</div></div>
+              </div>
+              <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed fw-bold px-0" type="button" data-bs-toggle="collapse" data-bs-target="#acc5bahan">Material &amp; Perawatan</button></h2>
+                <div id="acc5bahan" class="accordion-collapse collapse" data-bs-parent="#acc5"><div class="accordion-body px-0 small"><ul class="mb-0"><li>Bahan: Poliester, Nilon</li><li>Cuci air dingin</li></ul></div></div>
+              </div>
+              <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed fw-bold px-0" type="button" data-bs-toggle="collapse" data-bs-target="#acc5ukuran">Panduan Ukuran</button></h2>
+                <div id="acc5ukuran" class="accordion-collapse collapse" data-bs-parent="#acc5"><div class="accordion-body px-0">
+                  <table class="table table-sm table-bordered text-center small mb-1"><thead class="table-light"><tr><th>Ukuran</th><th>Tinggi</th><th>Berat</th></tr></thead><tbody><tr><td>S</td><td>155-165</td><td>50-58</td></tr><tr><td>M</td><td>160-170</td><td>58-66</td></tr><tr><td>L</td><td>165-175</td><td>66-74</td></tr><tr><td>XL</td><td>170-180</td><td>74-82</td></tr><tr><td>XXL</td><td>175-185</td><td>82-92</td></tr></tbody></table>
+                </div></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-5">
+            <p class="text-uppercase text-muted small fw-bold mb-1">Man Series</p>
+            <h3 class="fw-bold mb-2">Polo Shirt</h3>
+            <div class="d-flex align-items-center gap-2 mb-3 small">
+              <span class="text-warning"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i></span>
+              <span class="text-muted">4.3 (154 ulasan)</span>
+            </div>
+            <div class="d-flex align-items-center flex-wrap gap-2 mb-1"><span class="fs-3 fw-bold text-danger">Rp 299.000</span></div>
+            <p class="text-muted small mb-3">Bahan: Poliester, Nilon</p><hr>
+            <div class="mb-4">
+              <div class="fw-bold small text-uppercase mb-2">Warna</div>
+              <div class="d-flex flex-wrap gap-3">
+                <div class="text-center"><input type="radio" class="btn-check" name="warna5" id="w5-0" checked><label class="btn btn-outline-dark border-0 rounded-circle p-1 color-swatch-label" for="w5-0"><span class="d-block rounded-circle border" style="width:30px;height:30px;background:#fff;"></span></label><div class="small text-muted mt-1">Putih</div></div>
+                <div class="text-center"><input type="radio" class="btn-check" name="warna5" id="w5-1"><label class="btn btn-outline-dark border-0 rounded-circle p-1 color-swatch-label" for="w5-1"><span class="d-block rounded-circle border" style="width:30px;height:30px;background:#000;"></span></label><div class="small text-muted mt-1">Hitam</div></div>
+                <div class="text-center"><input type="radio" class="btn-check" name="warna5" id="w5-2"><label class="btn btn-outline-dark border-0 rounded-circle p-1 color-swatch-label" for="w5-2"><span class="d-block rounded-circle border" style="width:30px;height:30px;background:#1e3a8a;"></span></label><div class="small text-muted mt-1">Navy</div></div>
+                <div class="text-center"><input type="radio" class="btn-check" name="warna5" id="w5-3"><label class="btn btn-outline-dark border-0 rounded-circle p-1 color-swatch-label" for="w5-3"><span class="d-block rounded-circle border" style="width:30px;height:30px;background:#16a34a;"></span></label><div class="small text-muted mt-1">Hijau</div></div>
+              </div>
+            </div>
+            <div class="mb-4">
+              <div class="fw-bold small text-uppercase mb-2">Ukuran</div>
+              <div class="d-flex flex-wrap gap-2">
+                <input type="radio" class="btn-check" name="size5" id="s5s"><label class="btn btn-outline-dark rounded-0 px-3" for="s5s">S</label>
+                <input type="radio" class="btn-check" name="size5" id="s5m" checked><label class="btn btn-outline-dark rounded-0 px-3" for="s5m">M</label>
+                <input type="radio" class="btn-check" name="size5" id="s5l"><label class="btn btn-outline-dark rounded-0 px-3" for="s5l">L</label>
+                <input type="radio" class="btn-check" name="size5" id="s5xl"><label class="btn btn-outline-dark rounded-0 px-3" for="s5xl">XL</label>
+                <input type="radio" class="btn-check" name="size5" id="s5xxl"><label class="btn btn-outline-dark rounded-0 px-3" for="s5xxl">XXL</label>
+              </div>
+            </div>
+            <div class="mb-4">
+              <div class="fw-bold small text-uppercase mb-2">Jumlah</div>
+              <input type="number" class="form-control rounded-0 qty-input" value="1" min="1" max="10" style="width:100px;">
+            </div>
+            <div class="d-flex gap-2 mb-4">
+              <button type="button" class="btn btn-danger btn-lg rounded-0 flex-grow-1 fw-bold btn-add-cart" data-id="5" data-nama="Polo Shirt" data-harga="299000" data-gambar="produk5.jpg">
+                <i class="bi bi-bag-plus me-2"></i>TAMBAH KE KERANJANG
+              </button>
+            </div>
+            <ul class="list-unstyled small text-muted mb-0">
+              <li class="mb-1"><i class="bi bi-truck me-2"></i>Pengiriman ke seluruh Indonesia</li>
+              <li><i class="bi bi-shield-check me-2"></i>Pembayaran aman</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL PRODUK 6 -->
+<div class="modal fade" id="modalproduk6" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content border-0 rounded-0">
+      <div class="modal-header border-0 pb-0">
+        <nav aria-label="breadcrumb"><ol class="breadcrumb mb-0 small">
+          <li class="breadcrumb-item"><button type="button" class="btn btn-link p-0 small align-baseline text-danger text-decoration-none" data-bs-dismiss="modal">Home</button></li>
+          <li class="breadcrumb-item">Man</li><li class="breadcrumb-item active">Jaket Blouson</li>
+        </ol></nav>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row g-4 g-lg-5">
+          <div class="col-lg-7">
+            <div id="galeri6" class="carousel slide bg-light" data-bs-theme="dark">
+              <div class="carousel-indicators">
+                <button type="button" data-bs-target="#galeri6" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#galeri6" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#galeri6" data-bs-slide-to="2"></button>
+              </div>
+              <div class="carousel-inner">
+                <div class="carousel-item active"><div class="ratio ratio-4x3"><img src="produk6.jpg" class="object-fit-contain p-3" alt="Jaket Blouson"></div></div>
+                <div class="carousel-item"><div class="ratio ratio-4x3"><img src="produk6.jpg" class="object-fit-contain p-3" alt="Jaket Blouson"></div></div>
+                <div class="carousel-item"><div class="ratio ratio-4x3"><img src="produk6.jpg" class="object-fit-contain p-3" alt="Jaket Blouson"></div></div>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#galeri6" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
+              <button class="carousel-control-next" type="button" data-bs-target="#galeri6" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
+            </div>
+            <div class="accordion accordion-flush border-top mt-4" id="acc6">
+              <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button fw-bold px-0" type="button" data-bs-toggle="collapse" data-bs-target="#acc6desk">Deskripsi Produk</button></h2>
+                <div id="acc6desk" class="accordion-collapse collapse show" data-bs-parent="#acc6"><div class="accordion-body px-0 small">Jaket blouson ringan dengan siluet modern, tahan angin ringan.</div></div>
+              </div>
+              <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed fw-bold px-0" type="button" data-bs-toggle="collapse" data-bs-target="#acc6bahan">Material &amp; Perawatan</button></h2>
+                <div id="acc6bahan" class="accordion-collapse collapse" data-bs-parent="#acc6"><div class="accordion-body px-0 small"><ul class="mb-0"><li>Bahan: Kapas, Nilon</li><li>Cuci air dingin</li></ul></div></div>
+              </div>
+              <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed fw-bold px-0" type="button" data-bs-toggle="collapse" data-bs-target="#acc6ukuran">Panduan Ukuran</button></h2>
+                <div id="acc6ukuran" class="accordion-collapse collapse" data-bs-parent="#acc6"><div class="accordion-body px-0">
+                  <table class="table table-sm table-bordered text-center small mb-1"><thead class="table-light"><tr><th>Ukuran</th><th>Tinggi</th><th>Berat</th></tr></thead><tbody><tr><td>S</td><td>155-165</td><td>50-58</td></tr><tr><td>M</td><td>160-170</td><td>58-66</td></tr><tr><td>L</td><td>165-175</td><td>66-74</td></tr><tr><td>XL</td><td>170-180</td><td>74-82</td></tr><tr><td>XXL</td><td>175-185</td><td>82-92</td></tr></tbody></table>
+                </div></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-5">
+            <p class="text-uppercase text-muted small fw-bold mb-1">Man Series</p>
+            <h3 class="fw-bold mb-2">Jaket Blouson</h3>
+            <div class="d-flex align-items-center gap-2 mb-3 small">
+              <span class="text-warning"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></span>
+              <span class="text-muted">4.8 (63 ulasan)</span>
+            </div>
+            <div class="d-flex align-items-center flex-wrap gap-2 mb-1">
+              <span class="fs-3 fw-bold text-danger">Rp 479.000</span>
+              <span class="text-muted text-decoration-line-through">Rp 699.000</span>
+              <span class="badge bg-danger">-31%</span>
+            </div>
+            <p class="text-muted small mb-3">Bahan: Kapas, Nilon</p><hr>
+            <div class="mb-4">
+              <div class="fw-bold small text-uppercase mb-2">Warna</div>
+              <div class="d-flex flex-wrap gap-3">
+                <div class="text-center"><input type="radio" class="btn-check" name="warna6" id="w6-0" checked><label class="btn btn-outline-dark border-0 rounded-circle p-1 color-swatch-label" for="w6-0"><span class="d-block rounded-circle border" style="width:30px;height:30px;background:#000;"></span></label><div class="small text-muted mt-1">Hitam</div></div>
+                <div class="text-center"><input type="radio" class="btn-check" name="warna6" id="w6-1"><label class="btn btn-outline-dark border-0 rounded-circle p-1 color-swatch-label" for="w6-1"><span class="d-block rounded-circle border" style="width:30px;height:30px;background:#6b7280;"></span></label><div class="small text-muted mt-1">Abu</div></div>
+                <div class="text-center"><input type="radio" class="btn-check" name="warna6" id="w6-2"><label class="btn btn-outline-dark border-0 rounded-circle p-1 color-swatch-label" for="w6-2"><span class="d-block rounded-circle border" style="width:30px;height:30px;background:#ca8a04;"></span></label><div class="small text-muted mt-1">Mustard</div></div>
+              </div>
+            </div>
+            <div class="mb-4">
+              <div class="fw-bold small text-uppercase mb-2">Ukuran</div>
+              <div class="d-flex flex-wrap gap-2">
+                <input type="radio" class="btn-check" name="size6" id="s6s"><label class="btn btn-outline-dark rounded-0 px-3" for="s6s">S</label>
+                <input type="radio" class="btn-check" name="size6" id="s6m" checked><label class="btn btn-outline-dark rounded-0 px-3" for="s6m">M</label>
+                <input type="radio" class="btn-check" name="size6" id="s6l"><label class="btn btn-outline-dark rounded-0 px-3" for="s6l">L</label>
+                <input type="radio" class="btn-check" name="size6" id="s6xl"><label class="btn btn-outline-dark rounded-0 px-3" for="s6xl">XL</label>
+                <input type="radio" class="btn-check" name="size6" id="s6xxl"><label class="btn btn-outline-dark rounded-0 px-3" for="s6xxl">XXL</label>
+              </div>
+            </div>
+            <div class="mb-4">
+              <div class="fw-bold small text-uppercase mb-2">Jumlah</div>
+              <input type="number" class="form-control rounded-0 qty-input" value="1" min="1" max="10" style="width:100px;">
+            </div>
+            <div class="d-flex gap-2 mb-4">
+              <button type="button" class="btn btn-danger btn-lg rounded-0 flex-grow-1 fw-bold btn-add-cart" data-id="6" data-nama="Jaket Blouson" data-harga="479000" data-gambar="produk6.jpg">
+                <i class="bi bi-bag-plus me-2"></i>TAMBAH KE KERANJANG
+              </button>
+            </div>
+            <ul class="list-unstyled small text-muted mb-0">
+              <li class="mb-1"><i class="bi bi-truck me-2"></i>Pengiriman ke seluruh Indonesia</li>
+              <li><i class="bi bi-shield-check me-2"></i>Pembayaran aman</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL LOGIN -->
+<div class="modal fade" id="modalLogin" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 rounded-0">
+      <div class="modal-header border-0 pb-0">
+        <h5 class="modal-title fw-bold">Login</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form id="formLogin">
+          <div class="mb-3"><label class="form-label small fw-bold">Email</label><input type="email" class="form-control rounded-0" id="loginEmail" required></div>
+          <div class="mb-3"><label class="form-label small fw-bold">Password</label><input type="password" class="form-control rounded-0" id="loginPass" required></div>
+          <button type="submit" class="btn btn-danger w-100 rounded-0 fw-bold py-2">LOGIN</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL REGISTER -->
+<div class="modal fade" id="modalRegister" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 rounded-0">
+      <div class="modal-header border-0 pb-0">
+        <h5 class="modal-title fw-bold">Register</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form id="formRegister">
+          <div class="mb-3"><label class="form-label small fw-bold">Nama Lengkap</label><input type="text" class="form-control rounded-0" id="regNama" required></div>
+          <div class="mb-3"><label class="form-label small fw-bold">Email</label><input type="email" class="form-control rounded-0" id="regEmail" required></div>
+          <div class="mb-3"><label class="form-label small fw-bold">Password</label><input type="password" class="form-control rounded-0" id="regPass" minlength="6" required><small class="text-muted">Minimal 6 karakter</small></div>
+          <button type="submit" class="btn btn-danger w-100 rounded-0 fw-bold py-2">REGISTER</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL CHECKOUT -->
+<div class="modal fade" id="modalCheckout" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content border-0 rounded-0">
+      <div class="modal-header border-0 pb-0">
+        <h5 class="modal-title fw-bold">Checkout</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form id="formCheckout">
+          <div class="row g-3">
+            <div class="col-md-6"><label class="form-label small fw-bold">Nama Penerima</label><input type="text" class="form-control rounded-0" id="coNama" required></div>
+            <div class="col-md-6"><label class="form-label small fw-bold">No. HP</label><input type="tel" class="form-control rounded-0" id="coHP" required></div>
+            <div class="col-12"><label class="form-label small fw-bold">Alamat Lengkap</label><textarea class="form-control rounded-0" id="coAlamat" rows="2" required></textarea></div>
+            <div class="col-md-6">
+              <label class="form-label small fw-bold">Metode Pembayaran</label>
+              <select class="form-select rounded-0" id="coBayar" required>
+                <option value="">-- Pilih --</option>
+                <option>Transfer Bank BCA</option>
+                <option>Transfer Bank Mandiri</option>
+                <option>GoPay</option>
+                <option>OVO</option>
+                <option>DANA</option>
+                <option>COD (Bayar di Tempat)</option>
+              </select>
+            </div>
+            <div class="col-md-6"><label class="form-label small fw-bold">Total Pembayaran</label><input type="text" class="form-control rounded-0 bg-light fw-bold text-danger" id="coTotal" readonly></div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer border-0">
+        <button type="button" class="btn btn-outline-secondary rounded-0" data-bs-dismiss="modal">Batal</button>
+        <button type="submit" form="formCheckout" class="btn btn-danger rounded-0 fw-bold px-4">KONFIRMASI PESANAN</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST CONTAINER -->
+<div class="toast-container-uniqlo" id="toastContainer"></div>
+
+<!-- BOOTSTRAP JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+<!-- SCRIPT CUSTOM -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+  const cart = [];
+  let currentUser = JSON.parse(localStorage.getItem('uniqlo_user') || 'null');
+
+  function formatRupiah(n) { return 'Rp ' + n.toLocaleString('id-ID'); }
+
+  function tampilToast(pesan, tipe = 'dark') {
+    const id = 'toast-' + Date.now() + Math.random().toString(36).slice(2,6);
+    const html = `
+      <div id="${id}" class="toast align-items-center text-bg-${tipe} border-0 mb-2" role="alert">
+        <div class="d-flex">
+          <div class="toast-body">${pesan}</div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+        </div>
+      </div>`;
+    document.getElementById('toastContainer').insertAdjacentHTML('beforeend', html);
+    const el = document.getElementById(id);
+    const bsToast = new bootstrap.Toast(el, { delay: 2500 });
+    bsToast.show();
+    el.addEventListener('hidden.bs.toast', () => el.remove());
+  }
+
+  // ========== KERANJANG ==========
+  function renderCart() {
+    const totalQty = cart.reduce((s, i) => s + i.qty, 0);
+    document.getElementById('cartBadge').textContent = totalQty;
+    const cartEmpty = document.getElementById('cartEmpty');
+    const cartItems = document.getElementById('cartItems');
+    const cartTotal = document.getElementById('cartTotal');
+    const totalHarga = document.getElementById('totalHarga');
+    if (cart.length === 0) {
+      cartEmpty.classList.remove('d-none');
+      cartItems.innerHTML = '';
+      cartTotal.classList.add('d-none');
+      return;
+    }
+    cartEmpty.classList.add('d-none');
+    cartTotal.classList.remove('d-none');
+    let html = '', total = 0;
+    cart.forEach((item, idx) => {
+      total += item.harga * item.qty;
+      html += `
+        <div class="d-flex gap-3 border-bottom py-3">
+          <img src="${item.gambar}" style="width:70px;height:70px;object-fit:contain;" class="bg-light p-1">
+          <div class="flex-grow-1">
+            <div class="fw-bold small">${item.nama}</div>
+            <div class="text-muted small">Ukuran: ${item.size} | Warna: ${item.warna}</div>
+            <div class="text-danger fw-bold small">${formatRupiah(item.harga)}</div>
+            <div class="d-flex align-items-center gap-2 mt-1">
+              <button class="btn btn-sm btn-outline-secondary py-0 px-2" onclick="ubahQty(${idx}, -1)">−</button>
+              <span class="small">${item.qty}</span>
+              <button class="btn btn-sm btn-outline-secondary py-0 px-2" onclick="ubahQty(${idx}, 1)">+</button>
+              <button class="btn btn-sm btn-outline-danger py-0 px-2 ms-auto" onclick="hapusItem(${idx})"><i class="bi bi-trash"></i></button>
+            </div>
+          </div>
+        </div>`;
+    });
+    cartItems.innerHTML = html;
+    totalHarga.textContent = formatRupiah(total);
+  }
+
+  window.ubahQty = function (idx, delta) { cart[idx].qty += delta; if (cart[idx].qty < 1) cart[idx].qty = 1; renderCart(); };
+  window.hapusItem = function (idx) { cart.splice(idx, 1); renderCart(); };
+
+  // ========== ADD TO CART ==========
+  document.querySelectorAll('.btn-add-cart').forEach(btn => {
+    btn.addEventListener('click', function () {
+      const modal = btn.closest('.modal');
+      const id = btn.dataset.id;
+      const nama = btn.dataset.nama;
+      const harga = parseInt(btn.dataset.harga);
+      const gambar = btn.dataset.gambar;
+      const sizeInput = modal.querySelector(`input[name="size${id}"]:checked`);
+      const size = sizeInput ? sizeInput.nextElementSibling.textContent.trim() : 'M';
+      const warnaInput = modal.querySelector(`input[name="warna${id}"]:checked`);
+      let warna = '-';
+      if (warnaInput) {
+        const label = warnaInput.nextElementSibling;
+        const textEl = label.parentElement.querySelector('.small.text-muted');
+        if (textEl) warna = textEl.textContent.trim();
+      }
+      const qty = parseInt(modal.querySelector('.qty-input').value) || 1;
+      const existing = cart.find(i => i.id === id && i.size === size && i.warna === warna);
+      if (existing) existing.qty += qty;
+      else cart.push({ id, nama, harga, gambar, size, warna, qty });
+      renderCart();
+      const bsModal = bootstrap.Modal.getInstance(modal);
+      if (bsModal) bsModal.hide();
+      setTimeout(() => new bootstrap.Offcanvas(document.getElementById('canvasKeranjang')).show(), 300);
+      tampilToast(`✅ ${nama} (${size}, ${warna}) masuk keranjang`, 'success');
+    });
+  });
+
+  // ========== CHECKOUT ==========
+  document.getElementById('btnCheckout').addEventListener('click', function () {
+    if (cart.length === 0) return tampilToast('Keranjang masih kosong', 'warning');
+    const total = document.getElementById('totalHarga').textContent;
+    document.getElementById('coTotal').value = total;
+    new bootstrap.Modal(document.getElementById('modalCheckout')).show();
+  });
+
+  document.getElementById('formCheckout').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const nama = document.getElementById('coNama').value;
+    const bayar = document.getElementById('coBayar').value;
+    const total = document.getElementById('coTotal').value;
+    alert(`✅ Pesanan Dikonfirmasi!\n\nNama: ${nama}\nMetode: ${bayar}\nTotal: ${total}\n\nTerima kasih sudah berbelanja!`);
+    cart.length = 0;
+    renderCart();
+    bootstrap.Modal.getInstance(document.getElementById('modalCheckout')).hide();
+    const oc = bootstrap.Offcanvas.getInstance(document.getElementById('canvasKeranjang'));
+    if (oc) oc.hide();
+  });
+
+  // ========== LOGIN / REGISTER ==========
+  function updateUserUI() {
+    const btnLogin = document.getElementById('btnLogin');
+    const btnRegister = document.getElementById('btnRegister');
+    if (currentUser) {
+      btnLogin.innerHTML = `<i class="bi bi-person-circle"></i> ${currentUser.nama.split(' ')[0]}`;
+      btnLogin.classList.remove('btn-danger');
+      btnLogin.classList.add('btn-outline-danger');
+      btnRegister.textContent = 'Logout';
+      btnRegister.classList.remove('btn-outline-danger');
+      btnRegister.classList.add('btn-danger');
+    } else {
+      btnLogin.innerHTML = `<i class="bi bi-person-fill"></i> Login`;
+      btnLogin.classList.add('btn-danger');
+      btnLogin.classList.remove('btn-outline-danger');
+      btnRegister.textContent = 'Register';
+      btnRegister.classList.add('btn-outline-danger');
+      btnRegister.classList.remove('btn-danger');
+    }
+  }
+
+  document.getElementById('btnLogin').addEventListener('click', function () {
+    if (currentUser) { tampilToast(`Halo, ${currentUser.nama}! 👋`, 'success'); return; }
+    new bootstrap.Modal(document.getElementById('modalLogin')).show();
+  });
+
+  document.getElementById('btnRegister').addEventListener('click', function () {
+    if (currentUser) {
+      currentUser = null;
+      localStorage.removeItem('uniqlo_user');
+      updateUserUI();
+      tampilToast('👋 Berhasil logout', 'secondary');
+      return;
+    }
+    new bootstrap.Modal(document.getElementById('modalRegister')).show();
+  });
+
+  document.getElementById('formLogin').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const email = document.getElementById('loginEmail').value;
+    currentUser = { nama: email.split('@')[0], email };
+    localStorage.setItem('uniqlo_user', JSON.stringify(currentUser));
+    updateUserUI();
+    bootstrap.Modal.getInstance(document.getElementById('modalLogin')).hide();
+    this.reset();
+    tampilToast(`✅ Login berhasil! Selamat datang, ${currentUser.nama}`, 'success');
+  });
+
+  document.getElementById('formRegister').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const nama = document.getElementById('regNama').value;
+    const email = document.getElementById('regEmail').value;
+    currentUser = { nama, email };
+    localStorage.setItem('uniqlo_user', JSON.stringify(currentUser));
+    updateUserUI();
+    bootstrap.Modal.getInstance(document.getElementById('modalRegister')).hide();
+    this.reset();
+    tampilToast(`✅ Registrasi berhasil! Halo, ${nama}`, 'success');
+  });
+
+  // ========== SEARCH ==========
+  document.getElementById('inputSearch').addEventListener('input', function () {
+    const kw = this.value.toLowerCase().trim();
+    document.querySelectorAll('.produk-item').forEach(item => {
+      item.style.display = item.dataset.nama.includes(kw) ? '' : 'none';
+    });
+  });
+  document.getElementById('formSearch').addEventListener('submit', e => {
+    e.preventDefault();
+    document.getElementById('produk').scrollIntoView({ behavior: 'smooth' });
+  });
+
+  // ========== FILTER NAV ==========
+  document.querySelectorAll('.nav-filter').forEach(link => {
+    link.addEventListener('click', function (e) {
+      const filter = this.dataset.filter;
+      if (!filter) return;
+      e.preventDefault();
+      document.querySelectorAll('.produk-item').forEach(item => {
+        item.style.display = item.dataset.kategori.includes(filter) ? '' : 'none';
+      });
+      document.getElementById('produk').scrollIntoView({ behavior: 'smooth' });
+      tampilToast(`📦 Kategori: ${filter}`, 'dark');
+      const nav = document.getElementById('navbar');
+      if (nav.classList.contains('show')) new bootstrap.Collapse(nav).hide();
+    });
+  });
+
+  // ========== LIHAT SEMUA ==========
+  document.getElementById('btnLihatSemua').addEventListener('click', function () {
+    document.querySelectorAll('.produk-item').forEach(i => i.style.display = '');
+    document.getElementById('produk').scrollIntoView({ behavior: 'smooth' });
+    tampilToast('📦 Menampilkan semua produk', 'dark');
+  });
+
+  // ========== NEWSLETTER ==========
+  document.getElementById('formNewsletter').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const email = document.getElementById('emailNewsletter').value;
+    tampilToast(`✅ Email ${email} berhasil didaftarkan!`, 'success');
+    this.reset();
+  });
+
+  // ========== FOOTER KONTAK ==========
+  document.getElementById('footerKontak').addEventListener('click', function (e) {
+    e.preventDefault();
+    tampilToast('📧 cs@uniqlo-id.com | ☎ 021-1234-5678', 'dark');
+  });
+
+  // ========== SMOOTH SCROLL ==========
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', function (e) {
+      const href = this.getAttribute('href');
+      if (href === '#' || this.classList.contains('nav-filter')) return;
+      const target = document.querySelector(href);
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+
+  // ========== INIT ==========
+  renderCart();
+  updateUserUI();
+});
+</script>
+
+</body>
+</html>
